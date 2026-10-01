@@ -1,0 +1,392 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ateneo — Sala de préstamo</title>
+    <meta name="description" content="Sala de préstamo de Ateneo: catálogo, lectores y préstamos con control de stock y saldo." />
+    <meta name="theme-color" content="#12100e" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+    <script type="module" src="{% static 'js/main.js' %}" defer></script>
+</head> 
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <header id="site-header">
+    <div class="container header-inner">
+        <a href="#inicio" class="brand" aria-label="Ateneo, inicio">
+        <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            </svg>
+        </span>
+        <span>
+            <span class="brand-title">Ateneo</span>
+            <span class="brand-sub">Sala de préstamo</span>
+        </span>
+        </a>
+
+        <nav aria-label="Secciones de la sala" class="nav-scroll">
+        <ul class="nav-list">
+            <li><a href="#inicio" data-nav="inicio">Inicio</a></li>
+            <li><a href="#catalogo" data-nav="catalogo">Catálogo</a></li>
+            <li><a href="#autores" data-nav="autores">Autores</a></li>
+            <li><a href="#lectores" data-nav="lectores">Lectores</a></li>
+            <li><a href="#prestamos" data-nav="prestamos">Préstamos</a></li>
+        </ul>
+        </nav>
+
+        <button type="button" class="btn btn-primary header-cta" data-action="open-loan">
+        Nuevo préstamo
+        </button>
+    </div>
+    </header>
+
+    <main id="contenido">
+    <section id="inicio" aria-labelledby="inicio-title" class="hero">
+        <div class="container hero-grid">
+        <div>
+            <p class="eyebrow">Biblioteca de sala</p>
+            <h1 id="inicio-title">El catálogo abierto.</h1>
+            <p class="hero-lead">
+            Un mostrador para prestar y devolver. Cada título tiene precio y stock; cada
+            lector, un saldo. Las mismas reglas que el API: sin stock no hay préstamo, y
+            un lector no puede tener dos préstamos activos del mismo libro.
+            </p>
+            <div class="hero-actions">
+            <button type="button" class="btn btn-primary btn-lg" data-action="open-loan">
+                Prestar un libro
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+                </svg>
+            </button>
+            <a class="btn btn-secondary btn-lg" href="#catalogo">Ver catálogo</a>
+            </div>
+        </div>
+        <figure class="hero-figure">
+            <img
+            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='900' viewBox='0 0 1600 900'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%231c1916'/%3E%3Cstop offset='1' stop-color='%232a221b'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1600' height='900' fill='url(%23g)'/%3E%3Crect x='80' y='60' width='40' height='780' fill='%23352c24'/%3E%3Crect x='140' y='60' width='28' height='780' fill='%232e2620'/%3E%3Crect x='190' y='60' width='36' height='780' fill='%233a3028'/%3E%3Crect x='1200' y='60' width='32' height='780' fill='%23322a22'/%3E%3Crect x='1250' y='60' width='40' height='780' fill='%232c241e'/%3E%3Crect x='1310' y='60' width='24' height='780' fill='%23362e26'/%3E%3Cellipse cx='800' cy='620' rx='220' ry='40' fill='%23c8a070' opacity='0.12'/%3E%3Crect x='620' y='480' width='360' height='20' rx='4' fill='%234a3c30'/%3E%3Crect x='700' y='400' width='200' height='90' rx='4' fill='%23e8dcc8' opacity='0.85'/%3E%3Crect x='720' y='415' width='160' height='4' fill='%238c7358' opacity='0.4'/%3E%3Crect x='720' y='430' width='140' height='3' fill='%238c7358' opacity='0.3'/%3E%3Crect x='720' y='445' width='120' height='3' fill='%238c7358' opacity='0.25'/%3E%3Ccircle cx='900' cy='360' r='28' fill='%23d4b896' opacity='0.35'/%3E%3C/svg%3E"
+            width="1600"
+            height="900"
+            alt="Sala de lectura vacía al atardecer: estantes de nogal, una lámpara y un libro abierto sobre la mesa."
+            />
+            <figcaption>Sala principal · luz baja, estantería de nogal</figcaption>
+        </figure>
+        </div>
+        <dl class="container stats" id="stats">
+        <div class="stat">
+            <dt>Títulos</dt>
+            <dd class="tabular" id="stat-titles">0</dd>
+        </div>
+        <div class="stat">
+            <dt>Disponibles</dt>
+            <dd class="tabular" id="stat-available">0</dd>
+        </div>
+        <div class="stat">
+            <dt>Préstamos activos</dt>
+            <dd class="tabular" id="stat-loans">0</dd>
+        </div>
+        <div class="stat">
+            <dt>Lectores</dt>
+            <dd class="tabular" id="stat-readers">0</dd>
+        </div>
+        </dl>
+    </section>
+
+    <section id="catalogo" aria-labelledby="catalogo-title" class="panel">
+        <div class="container">
+        <div class="panel-head">
+            <div>
+            <h2 id="catalogo-title">Catálogo</h2>
+            <p id="catalogo-sub">Ejemplares en sala. Filtra por categoría o disponibilidad.</p>
+            </div>
+            <button type="button" class="btn btn-secondary" data-action="open-book">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+            Nuevo libro
+            </button>
+        </div>
+
+        <div class="filters">
+            <div class="search-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+            </svg>
+            <input
+                class="input"
+                id="catalog-search"
+                type="search"
+                name="q"
+                autocomplete="off"
+                placeholder="Buscar por título, autor o género"
+                aria-label="Buscar en el catálogo"
+            />
+            </div>
+            <fieldset>
+            <legend class="sr-only">Filtrar por categoría</legend>
+            <div class="chip-row" id="category-chips" role="group" aria-label="Categorías"></div>
+            </fieldset>
+            <fieldset>
+            <legend class="sr-only">Filtrar por disponibilidad</legend>
+            <div class="chip-row" role="group" aria-label="Disponibilidad">
+                <button type="button" class="chip is-active" data-availability="all" aria-pressed="true">Todos</button>
+                <button type="button" class="chip" data-availability="in" aria-pressed="false">En sala</button>
+                <button type="button" class="chip" data-availability="out" aria-pressed="false">Agotados</button>
+            </div>
+            </fieldset>
+        </div>
+
+        <div id="book-grid" class="book-grid" aria-live="polite"></div>
+        </div>
+    </section>
+
+    <section id="autores" aria-labelledby="autores-title" class="panel panel-muted">
+        <div class="container">
+        <div class="panel-head">
+            <div>
+            <h2 id="autores-title">Autores</h2>
+            <p>Fichas del catálogo, con el recuento de títulos.</p>
+            </div>
+            <button type="button" class="btn btn-secondary" data-action="open-author">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+            Nuevo autor
+            </button>
+        </div>
+        <div id="author-grid" class="entity-grid"></div>
+        </div>
+    </section>
+
+    <section id="lectores" aria-labelledby="lectores-title" class="panel">
+        <div class="container">
+        <div class="panel-head">
+            <div>
+            <h2 id="lectores-title">Lectores</h2>
+            <p>El saldo se descuenta al prestar y vuelve al devolver.</p>
+            </div>
+            <button type="button" class="btn btn-secondary" data-action="open-reader">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+            Nuevo lector
+            </button>
+        </div>
+        <div id="reader-grid" class="entity-grid"></div>
+        </div>
+    </section>
+
+    <section id="prestamos" aria-labelledby="prestamos-title" class="panel panel-soft">
+        <div class="container">
+        <div class="panel-head">
+            <div>
+            <h2 id="prestamos-title">Préstamos</h2>
+            <p>Un préstamo activo bloquea ese título para el mismo lector hasta la devolución.</p>
+            </div>
+            <button type="button" class="btn btn-primary" data-action="open-loan">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+            Registrar
+            </button>
+        </div>
+        <ul id="loan-list" class="loan-list"></ul>
+        </div>
+    </section>
+    </main>
+
+    <footer id="site-footer">
+    <div class="container footer-grid">
+        <div>
+        <h2>Ateneo</h2>
+        <p>
+            Sala de préstamo. El catálogo, los lectores y las reglas de stock viven en
+            esta página.
+        </p>
+        </div>
+        <address>
+        <p class="footer-label">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/>
+            </svg>
+            Sede
+        </p>
+        <p>Calle de los Cedros 18</p>
+        <p>Col. Roma Norte, Ciudad de México</p>
+        <p>Martes a domingo · 11:00–20:00</p>
+        </address>
+        <div>
+        <button type="button" class="btn btn-secondary" id="reset-catalog">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
+            </svg>
+            Restaurar catálogo de muestra
+        </button>
+        <p class="footer-note">Los cambios se guardan en este navegador.</p>
+        </div>
+    </div>
+    </footer>
+
+    <div class="dialog-backdrop" id="dialog-loan" role="presentation">
+    <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="loan-title" aria-describedby="loan-desc">
+        <button type="button" class="dialog-close" data-close aria-label="Cerrar">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+        <h2 id="loan-title">Nuevo préstamo</h2>
+        <p class="dialog-desc" id="loan-desc">
+        Se descuenta el stock del libro y el saldo del lector. Al devolver, ambos se restauran.
+        </p>
+        <form id="loan-form" class="form-grid" novalidate>
+        <div class="field">
+            <label for="loan-user">Lector</label>
+            <select class="select" id="loan-user" name="user" required></select>
+            <p class="error" id="loan-user-error" role="alert" hidden></p>
+        </div>
+        <div class="field">
+            <label for="loan-book">Libro</label>
+            <select class="select" id="loan-book" name="book" required></select>
+            <p class="error" id="loan-book-error" role="alert" hidden></p>
+        </div>
+        <div class="field">
+            <label for="loan-quantity">Cantidad</label>
+            <p class="hint" id="loan-quantity-hint"></p>
+            <input class="input" id="loan-quantity" name="quantity" type="number" inputmode="numeric" min="1" step="1" value="1" required aria-describedby="loan-quantity-hint" />
+            <p class="error" id="loan-quantity-error" role="alert" hidden></p>
+        </div>
+        <p class="summary-box" id="loan-summary">Total a descontar: <strong>$0.00</strong></p>
+        <div class="dialog-footer">
+            <button type="button" class="btn btn-ghost" data-close>Cancelar</button>
+            <button type="submit" class="btn btn-primary">Confirmar préstamo</button>
+        </div>
+        </form>
+    </div>
+    </div>
+
+    <div class="dialog-backdrop" id="dialog-book" role="presentation">
+    <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="book-dialog-title" aria-describedby="book-dialog-desc">
+        <button type="button" class="dialog-close" data-close aria-label="Cerrar">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+        <h2 id="book-dialog-title">Nuevo libro</h2>
+        <p class="dialog-desc" id="book-dialog-desc">Título, autor, categorías, precio y ejemplares en sala.</p>
+        <form id="book-form" class="form-grid" novalidate>
+        <input type="hidden" id="book-id" name="id" value="" />
+        <div class="field">
+            <label for="book-title-input">Título</label>
+            <input class="input" id="book-title-input" name="title" maxlength="50" required autocomplete="off" />
+            <p class="error" id="book-title-error" role="alert" hidden></p>
+        </div>
+        <div class="field">
+            <label for="book-author">Autor</label>
+            <select class="select" id="book-author" name="author" required></select>
+            <p class="error" id="book-author-error" role="alert" hidden></p>
+        </div>
+        <fieldset>
+            <legend>Categorías</legend>
+            <div class="check-grid" id="book-categories"></div>
+            <p class="error" id="book-categories-error" role="alert" hidden></p>
+        </fieldset>
+        <div class="form-row">
+            <div class="field">
+            <label for="book-price">Precio</label>
+            <input class="input" id="book-price" name="price" type="number" inputmode="decimal" min="0.01" step="0.01" required />
+            <p class="error" id="book-price-error" role="alert" hidden></p>
+            </div>
+            <div class="field">
+            <label for="book-stock">Stock</label>
+            <input class="input" id="book-stock" name="stock" type="number" inputmode="numeric" min="0" step="1" required />
+            <p class="error" id="book-stock-error" role="alert" hidden></p>
+            </div>
+        </div>
+        <div class="dialog-footer">
+            <button type="button" class="btn btn-ghost" data-close>Cancelar</button>
+            <button type="submit" class="btn btn-primary" id="book-submit">Añadir libro</button>
+        </div>
+        </form>
+    </div>
+    </div>
+
+    <div class="dialog-backdrop" id="dialog-author" role="presentation">
+    <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="author-dialog-title">
+        <button type="button" class="dialog-close" data-close aria-label="Cerrar">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+        <h2 id="author-dialog-title">Nuevo autor</h2>
+        <p class="dialog-desc">Nombre y año de nacimiento.</p>
+        <form id="author-form" class="form-grid" novalidate>
+        <input type="hidden" id="author-id" value="" />
+        <div class="field">
+            <label for="author-name">Nombre</label>
+            <input class="input" id="author-name" name="name" maxlength="30" required autocomplete="name" />
+            <p class="error" id="author-name-error" role="alert" hidden></p>
+        </div>
+        <div class="field">
+            <label for="author-year">Año de nacimiento</label>
+            <input class="input" id="author-year" name="birth_year" type="number" inputmode="numeric" min="1000" max="2026" required />
+            <p class="error" id="author-year-error" role="alert" hidden></p>
+        </div>
+        <div class="dialog-footer">
+            <button type="button" class="btn btn-ghost" data-close>Cancelar</button>
+            <button type="submit" class="btn btn-primary" id="author-submit">Añadir autor</button>
+        </div>
+        </form>
+    </div>
+    </div>
+
+    <div class="dialog-backdrop" id="dialog-reader" role="presentation">
+    <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="reader-dialog-title">
+        <button type="button" class="dialog-close" data-close aria-label="Cerrar">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+        <h2 id="reader-dialog-title">Nuevo lector</h2>
+        <p class="dialog-desc">Cada lector tiene un saldo que se usa al prestar y se reembolsa al devolver.</p>
+        <form id="reader-form" class="form-grid" novalidate>
+        <input type="hidden" id="reader-id" value="" />
+        <div class="field">
+            <label for="reader-name">Nombre</label>
+            <input class="input" id="reader-name" name="name" maxlength="40" required autocomplete="name" />
+            <p class="error" id="reader-name-error" role="alert" hidden></p>
+        </div>
+        <div class="field">
+            <label for="reader-money">Saldo</label>
+            <input class="input" id="reader-money" name="money" type="number" inputmode="decimal" min="0" max="9999.99" step="0.01" required />
+            <p class="error" id="reader-money-error" role="alert" hidden></p>
+        </div>
+        <div class="dialog-footer">
+            <button type="button" class="btn btn-ghost" data-close>Cancelar</button>
+            <button type="submit" class="btn btn-primary" id="reader-submit">Añadir lector</button>
+        </div>
+        </form>
+    </div>
+    </div>
+
+    <div class="dialog-backdrop" id="dialog-return" role="presentation">
+    <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="return-title" aria-describedby="return-desc">
+        <button type="button" class="dialog-close" data-close aria-label="Cerrar">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+        <h2 id="return-title">Devolver préstamo</h2>
+        <p class="dialog-desc" id="return-desc"></p>
+        <div class="dialog-footer">
+        <button type="button" class="btn btn-ghost" data-close>Cancelar</button>
+        <button type="button" class="btn btn-primary" id="confirm-return">Confirmar devolución</button>
+        </div>
+    </div>
+    </div>
+
+    <div class="dialog-backdrop" id="dialog-delete" role="presentation">
+    <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="delete-title" aria-describedby="delete-desc">
+        <button type="button" class="dialog-close" data-close aria-label="Cerrar">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+        <h2 id="delete-title">Eliminar registro</h2>
+        <p class="dialog-desc" id="delete-desc"></p>
+        <div class="dialog-footer">
+        <button type="button" class="btn btn-ghost" data-close>Cancelar</button>
+        <button type="button" class="btn btn-danger" id="confirm-delete">Eliminar</button>
+        </div>
+    </div>
+    </div>
+
+    <div id="toast-region" aria-live="polite" aria-relevant="additions"></div>
+</body>
+</html>
