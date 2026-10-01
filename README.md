@@ -1,47 +1,48 @@
-# Ateneo — Sala de préstamo
+# Ateneo — Lending Room
 
-Aplicación web full-stack para gestionar el catálogo de una biblioteca de sala: libros, autores, categorías, lectores y préstamos.
+Full-stack web application to manage a room library catalog: books, authors, categories, readers, and loans.
 
-El backend expone una API REST con Django y Django REST Framework. El frontend es una interfaz en JavaScript modular que consume esa API, con las mismas reglas de negocio (stock, saldo y préstamos activos).
+The backend exposes a REST API built with Django and Django REST Framework. The frontend is a modular JavaScript interface that consumes the API while enforcing the same business logic (stock, balance, and active loans).
 
 ---
 
-## Características
+## Features
 
-- Catálogo de libros con autor, categorías, precio y stock
-- Gestión de autores y lectores (saldo)
-- Préstamos y devoluciones
-  - Sin stock no hay préstamo
-  - Se descuenta el saldo del lector al prestar y se reembolsa al devolver
-  - Un lector no puede tener dos préstamos activos del mismo libro
-- Panel de administración Django (`/admin/`)
-- Frontend modular (API, state, UI, controllers, events)
-- Comando para cargar datos de muestra (`seed_library`)
+- Book catalog with author, categories, price, and stock
+- Author and reader management (reader balance)
+- Loans and returns
+- No lending allowed if out of stock
+- Reader balance is deducted upon borrowing and refunded upon returning
+- A reader cannot have two active loans for the same book
+- Django administration panel (`/admin/`)
+- Modular frontend (API, state, UI, controllers, events)
+- Command to seed sample data (`seed_library`)
 
 ---
 
 ## Stack
 
-| Capa | Tecnología |
-|------|------------|
-| Backend | Python, Django 6, Django REST Framework |
-| Base de datos | SQLite (desarrollo) |
-| Frontend | HTML, CSS, JavaScript (ES modules) |
-| Config | `python-dotenv` / variables de entorno |
+| Layer          | Technology                              |
+| -------------- | --------------------------------------- |
+| Backend        | Python, Django 6, Django REST Framework |
+| Database       | SQLite (development)                    |
+| Frontend       | HTML, CSS, JavaScript (ES modules)      |
+| Config         | `python-dotenv` / environment variables |
 
 ---
 
-## Requisitos
+## Requirements
 
-- Python 3.12 o superior (recomendado)
+- Python 3.12 or higher
 - `pip`
-- Git (opcional, si clonas el repositorio)
+- Git
 
 ---
 
-## Instalación
+## Installation
 
-### 1. Clonar o abrir el proyecto
+### 1. Clone the repository
 
 ```bash
-cd ruta/a/tu/proyecto
+git clone https://github.com/jose_litrico/library-management-system.git
+cd library-management-system
